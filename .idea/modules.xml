@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/book-market-server.iml" filepath="$PROJECT_DIR$/.idea/modules/book-market-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/book-market-server_main.iml" filepath="$PROJECT_DIR$/.idea/modules/book-market-server_main.iml" group="book-market-server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/book-market-server_test.iml" filepath="$PROJECT_DIR$/.idea/modules/book-market-server_test.iml" group="book-market-server" />
+    </modules>
+  </component>
+</project>
