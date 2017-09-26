@@ -1,0 +1,4 @@
+# Database config and API Key #
+*.properties
+/src/main/java/com/bk/bm/util/Constants.java
+
