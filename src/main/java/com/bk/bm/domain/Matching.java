@@ -15,4 +15,7 @@ public class Matching {
     private int s_id;
     private int b_id;
 
+    private int s_uid;
+    private int b_uid;
+
 }
