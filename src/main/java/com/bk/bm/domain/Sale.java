@@ -3,6 +3,7 @@ package com.bk.bm.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -19,7 +20,8 @@ public class Sale {
     private String isbn13;
     private String title;
     private int price;
-    private String area;
+    private ArrayList<SaleArea> area;
+    private ArrayList<SaleImage> images;
     private int status;
     private String comment;
     private Date created_at;

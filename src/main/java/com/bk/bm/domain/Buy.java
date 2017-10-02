@@ -3,6 +3,7 @@ package com.bk.bm.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -20,7 +21,8 @@ public class Buy {
     private String title;
     private int price_min;
     private int price_max;
-    private String area;
+    private ArrayList<BuyArea> area;
+    private ArrayList<BuyImage> images;
     private int status;
     private String comment;
     private Date created_at;
