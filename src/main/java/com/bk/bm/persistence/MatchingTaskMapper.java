@@ -51,4 +51,5 @@ public interface MatchingTaskMapper {
     })
     ArrayList<User> getFcmTokenOfUsers(@Param("uids") ArrayList<Integer> uids);
 
+
 }

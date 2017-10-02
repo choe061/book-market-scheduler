@@ -65,4 +65,5 @@ public class MatchingTaskServiceImpl implements MatchingTaskService {
             restTemplate.exchange(Constants.FCM_SEND_ENDPOINT, HttpMethod.POST, request, HashMap.class);
         }
     }
+
 }

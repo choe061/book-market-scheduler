@@ -23,4 +23,5 @@ public interface BuyService {
     HttpResponse updateBuyInfo(Buy buy);
 
     HttpResponse deleteBuy(int buy_id);
+
 }

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class BuyController {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
-
+    
     @Autowired
     private BuyService buyService;
 

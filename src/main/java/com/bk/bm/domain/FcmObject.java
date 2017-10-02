@@ -13,5 +13,4 @@ public class FcmObject {
 
     private String to;
     private Message message;
-
 }

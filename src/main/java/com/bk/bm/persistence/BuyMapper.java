@@ -29,4 +29,5 @@ public interface BuyMapper {
 
     @Delete("DELETE FROM BUY WHERE buy_id")
     void deleteBuy(@Param("buy_id") int buy_id);
+
 }

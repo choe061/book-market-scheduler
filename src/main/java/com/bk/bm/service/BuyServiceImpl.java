@@ -52,4 +52,5 @@ public class BuyServiceImpl implements BuyService {
         }
         return new HttpResponse(true, "도서 정보 삭제 성공");
     }
+
 }

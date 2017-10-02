@@ -13,5 +13,4 @@ public class BuyImage {
     private int buy_img_id;
     private String image_url;
     private int buy_id;
-
 }

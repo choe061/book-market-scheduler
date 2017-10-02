@@ -14,5 +14,4 @@ public class BuyArea {
     private int buy_area_id;
     private String area;
     private int buy_id;
-
 }

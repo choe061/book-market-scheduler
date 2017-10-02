@@ -13,5 +13,4 @@ public class SaleImage {
     private int sale_image_id;
     private String image_url;
     private int sale_id;
-
 }

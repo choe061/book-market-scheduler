@@ -13,4 +13,5 @@ public class SaleArea {
     private int sale_area_id;
     private String area;
     private int sale_id;
+
 }
