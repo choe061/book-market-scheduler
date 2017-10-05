@@ -1,6 +1,7 @@
 package com.bk.bm.config;
 
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.type.TypeHandler;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
@@ -17,7 +18,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 @MapperScan(
-        basePackages = {"com.choi.spring.persistence"}
+        basePackages = {"com.bk.bm.persistence"}
 )
 public class MybatisConfig {
 
@@ -25,7 +26,8 @@ public class MybatisConfig {
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
         sqlSessionFactory.setDataSource(dataSource);
-        sqlSessionFactory.setTypeAliasesPackage("com.choi.spring.domain");
+        sqlSessionFactory.setTypeAliasesPackage("com.bk.bm.domain");
+        sqlSessionFactory.setTypeHandlers(new TypeHandler[]{new VarcharTypeHandler(), new DateTypeHandler()});
         return sqlSessionFactory.getObject();
     }
 

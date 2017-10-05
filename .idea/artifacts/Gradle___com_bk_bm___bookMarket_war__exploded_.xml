@@ -33,7 +33,6 @@
           <element id="library" level="project" name="Gradle: org.aspectj:aspectjweaver:1.8.9" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-context:4.2.4.RELEASE" />
           <element id="library" level="project" name="Gradle: org.slf4j:slf4j-api:1.7.12" />
-          <element id="library" level="project" name="Gradle: org.projectlombok:lombok:1.16.16" />
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.8.8" />
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.8.8" />
           <element id="library" level="project" name="Gradle: commons-logging:commons-logging:1.2" />
@@ -44,6 +43,7 @@
           <element id="library" level="project" name="Gradle: org.slf4j:slf4j-log4j12:1.7.12" />
           <element id="library" level="project" name="Gradle: log4j:log4j:1.2.17" />
           <element id="library" level="project" name="Gradle: javax.servlet:jstl:1.1.2" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.16.18/557d13dcb647038dc687390711ccb5c9b3ffbd60/lombok-1.16.18.jar" />
         </element>
       </element>
     </root>

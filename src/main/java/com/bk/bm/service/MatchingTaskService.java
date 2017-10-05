@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface MatchingTaskService {
 
-    @Scheduled(cron = "0 0/20 * * * *")
+    @Scheduled(cron = "0 0/30 * * * *")
     void matchBookScheduler();
 
 }

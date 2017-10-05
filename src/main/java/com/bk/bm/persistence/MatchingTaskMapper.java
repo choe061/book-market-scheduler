@@ -44,7 +44,7 @@ public interface MatchingTaskMapper {
                     "SELECT uid, fcm_token " +
                     "FROM USER " +
                     "WHERE uid IN " +
-                    "<foreach collection='uids' item='uid' separator=',' open='(' close=')'" +
+                    "<foreach collection='uids' item='uid' separator=',' open='(' close=')'>" +
                         "#{uid}" +
                     "</foreach>" +
             "</script>"

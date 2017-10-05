@@ -29,8 +29,12 @@ import java.util.HashMap;
 @Service("MatchingTaskService")
 public class MatchingTaskServiceImpl implements MatchingTaskService {
 
+    private final MatchingTaskMapper matchingTaskMapper;
+
     @Autowired
-    private MatchingTaskMapper matchingTaskMapper;
+    public MatchingTaskServiceImpl(MatchingTaskMapper matchingTaskMapper) {
+        this.matchingTaskMapper = matchingTaskMapper;
+    }
 
     @Override
     public void matchBookScheduler() {

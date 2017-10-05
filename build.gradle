@@ -69,7 +69,7 @@ dependencies {
 
     runtime "javax.servlet:jstl:1.1.2"
 
-    compile "org.projectlombok:lombok:1.16.16"
+    compile "org.projectlombok:lombok:1.16.18"
 
     compile "com.fasterxml.jackson.core:jackson-core:${ver.jackson}",
             "com.fasterxml.jackson.core:jackson-databind:${ver.jackson}"

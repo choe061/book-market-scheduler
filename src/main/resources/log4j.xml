@@ -11,7 +11,7 @@
     </appender>
 
     <!-- Application Loggers -->
-    <logger name="kr.co.whitelife.spring">
+    <logger name="com.bk.bm">
         <level value="debug" />
     </logger>
 
