@@ -1,21 +1,81 @@
 package com.bk.bm.service;
 
+import com.bk.bm.domain.FcmObject;
+import com.bk.bm.domain.Matching;
+import com.bk.bm.domain.Message;
+import com.bk.bm.domain.User;
+import com.bk.bm.persistence.MatchingTaskMapper;
+import com.bk.bm.util.Constants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
- * Created by choi on 2017. 9. 25. PM 4:11.
- * 10분마다 스케줄러 작동
- * N:M 매핑, Matching 테이블 구현
- * 조건
- *  1. 기존에 매칭된 레코드들인지 확인해야한다.
- *  2. Sale 또는 Buy 테이블에서 삭제되는 경우 Matching 테이블에서도 삭제시켜야한다.
+ * Created by choi on 2017. 9. 25. PM 4:10.
  */
 
-@Transactional
-public interface MatchingTaskService {
+@Service
+public class MatchingTaskServiceImpl {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Scheduled(cron = "0 0/30 * * * *")
-    void matchBookScheduler();
+    private final MatchingTaskMapper matchingTaskMapper;
+
+    @Autowired
+    public MatchingTaskServiceImpl(MatchingTaskMapper matchingTaskMapper) {
+        this.matchingTaskMapper = matchingTaskMapper;
+    }
+
+    @Scheduled(cron = "0 0/1 * * * *")
+    public void matchBookScheduler() {
+        logger.debug("Scheduler start...");
+        ArrayList<Matching> newMatchingBooks = matchingTaskMapper.getNewMatchingBooks();
+
+        if (!newMatchingBooks.isEmpty()) {
+            matchingTaskMapper.matchingBooks(newMatchingBooks);
+
+            ArrayList<Integer> uids = new ArrayList<>();
+            for (Matching matching : newMatchingBooks) {
+                if (uids.contains(matching.getSale_uid())) {
+                    uids.add(matching.getSale_uid());
+                }
+                if (uids.contains(matching.getBuy_uid())) {
+                    uids.add(matching.getBuy_uid());
+                }
+            }
+            ArrayList<User> users = matchingTaskMapper.getFcmTokenOfUsers(uids);
+            sendFcmNewMatching(users);
+        }
+        logger.debug("Scheduler end...");
+    }
+
+    private void sendFcmNewMatching(ArrayList<User> users) {
+        for (User user : users) {
+            logger.debug(user.getUid()+", "+user.getFcm_token());
+        }
+        //TODO Send FCM Message
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("Authorization", "key=" + Constants.FCM_KEY);
+
+        int size = users.size();
+        for (int i = 0; i < size; i++) {
+            Message message = new Message("췕48 매칭 알림", "찾고있는 책이 들어왔습니다", "");
+            FcmObject fcmObject = new FcmObject(users.get(i).getFcm_token(), message);
+
+            HttpEntity request = new HttpEntity(fcmObject, headers);
+            restTemplate.exchange(Constants.FCM_SEND_ENDPOINT, HttpMethod.POST, request, HashMap.class);
+        }
+    }
 
 }
