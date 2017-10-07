@@ -1,9 +1,9 @@
 package com.bk.bm.service;
 
-import com.bk.bm.domain.HttpResponse;
 import com.bk.bm.domain.Sale;
 import com.bk.bm.persistence.SaleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -32,17 +32,17 @@ public class SaleServiceImpl implements BookService<Sale> {
     }
 
     @Override
-    public Sale getBook(int buy_id) {
+    public Sale getBook(int book_id) {
         return null;
     }
 
     @Override
-    public HttpResponse updateBook(Sale book) {
-        return null;
+    public boolean updateBook(Sale book) {
+        return true;
     }
 
     @Override
-    public HttpResponse deleteBook(int buy_id) {
-        return null;
+    public boolean deleteBook(int book_id) {
+        return true;
     }
 }

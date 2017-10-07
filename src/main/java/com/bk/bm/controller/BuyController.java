@@ -2,22 +2,25 @@ package com.bk.bm.controller;
 
 import com.bk.bm.domain.Buy;
 import com.bk.bm.domain.HttpResponse;
+import com.bk.bm.domain.User;
 import com.bk.bm.service.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
  * Created by choi on 2017. 10. 2. PM 8:51.
  */
 @RestController
-@RequestMapping(value = "/buy")
+@RequestMapping(value = "/buy", produces = "application/json;charset=utf-8")
 public class BuyController {
-
     private final Logger logger = LoggerFactory.getLogger(getClass());
     
     private final BookService<Buy> buyService;
@@ -28,32 +31,50 @@ public class BuyController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    @ResponseBody
-    public Buy createBuyBook(@RequestBody Buy buy) {
-        return buyService.createBook(buy);
+    public ResponseEntity<Buy> createBuyBook(@RequestBody Buy buy) {
+        Buy responseBook = buyService.createBook(buy);
+        if (responseBook != null) {
+            return new ResponseEntity<Buy>(responseBook, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<Buy>(responseBook, HttpStatus.NO_CONTENT);
+        }
     }
 
     @RequestMapping(value = "/all/{uid}", method = RequestMethod.GET)
-    @ResponseBody
-    public ArrayList<Buy> getAllBuy(@PathVariable int uid) {
-        return buyService.getAllBooks(uid);
+    public ResponseEntity<ArrayList<Buy>> getAllBuy(@PathVariable int uid) {
+        ArrayList<Buy> responseBooks = buyService.getAllBooks(uid);
+        if (!responseBooks.isEmpty()) {
+            return new ResponseEntity<ArrayList<Buy>>(responseBooks, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<ArrayList<Buy>>(responseBooks, HttpStatus.NO_CONTENT);
+        }
     }
 
     @RequestMapping(value = "/{buy_id}", method = RequestMethod.GET)
-    @ResponseBody
-    public Buy getBuy(@PathVariable int buy_id) {
-        return buyService.getBook(buy_id);
+    public ResponseEntity<Buy> getBuy(@PathVariable int buy_id) {
+        Buy responseBook = buyService.getBook(buy_id);
+        if (responseBook != null) {
+            return new ResponseEntity<Buy>(responseBook, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<Buy>(responseBook, HttpStatus.NO_CONTENT);
+        }
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    @ResponseBody
-    public HttpResponse updateBuyInfo(@RequestBody Buy buy) {
-        return buyService.updateBook(buy);
+    public ResponseEntity updateBuyInfo(@RequestBody Buy buy) {
+        if (buyService.updateBook(buy)) {
+            return new ResponseEntity(HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @RequestMapping(value = "/{buy_id}", method = RequestMethod.DELETE)
-    @ResponseBody
-    public HttpResponse deleteBuy(@PathVariable int buy_id) {
-        return buyService.deleteBook(buy_id);
+    public ResponseEntity deleteBuy(@PathVariable int buy_id) {
+        if (buyService.deleteBook(buy_id)) {
+            return new ResponseEntity(HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

@@ -1,6 +1,8 @@
 package com.bk.bm.service;
 
 import com.bk.bm.domain.HttpResponse;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -17,10 +19,10 @@ public interface BookService<T> {
     ArrayList<T> getAllBooks(int uid);
 
     @Transactional(readOnly = true)
-    T getBook(int buy_id);
+    T getBook(int book_id);
 
-    HttpResponse updateBook(T book);
+    boolean updateBook(T book);
 
-    HttpResponse deleteBook(int buy_id);
+    boolean deleteBook(int book_id);
 
 }

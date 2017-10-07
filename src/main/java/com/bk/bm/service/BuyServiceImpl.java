@@ -1,13 +1,13 @@
 package com.bk.bm.service;
 
 import com.bk.bm.domain.Buy;
-import com.bk.bm.domain.HttpResponse;
 import com.bk.bm.persistence.BuyMapper;
-import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -15,51 +15,75 @@ import java.util.ArrayList;
  */
 @Service("buyService")
 public class BuyServiceImpl implements BookService<Buy> {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    private final SqlSession sqlSession;
     private final BuyMapper buyMapper;
 
     @Autowired
-    public BuyServiceImpl(BuyMapper buyMapper, SqlSession sqlSession) {
+    public BuyServiceImpl(BuyMapper buyMapper) {
         this.buyMapper = buyMapper;
-        this.sqlSession = sqlSession;
     }
 
     @Override
     public Buy createBook(Buy book) {
-        int buy_id = buyMapper.insertBuyBook(book);
-        return buyMapper.getBuy(buy_id);
+        Buy buy = null;
+        try {
+            int buy_id = buyMapper.insertBuyBook(book);
+            buy = buyMapper.getBuy(buy_id);
+        } catch (SQLException e) {
+            logger.debug("createBook() SQLException - "+e);
+            return buy;
+        }
+        return buy;
     }
 
     @Override
     public ArrayList<Buy> getAllBooks(int uid) {
-        return buyMapper.getAllBuy(uid);
+        ArrayList<Buy> books = new ArrayList<>();
+        try {
+            books = buyMapper.getAllBuy(uid);
+        } catch (SQLException e) {
+            logger.debug("getAllBooks() SQLException - "+e);
+            return books;
+        }
+        return books;
     }
 
     @Override
-    public Buy getBook(int buy_id) {
-        Buy buy = buyMapper.getBuy(buy_id);
-        System.out.println("BUY : "+buy+", "+buy.getBuy_id());
-        return buyMapper.getBuy(buy_id);
+    public Buy getBook(int book_id) {
+        Buy buy = null;
+        try {
+            buy = buyMapper.getBuy(book_id);
+            buy.setArea(buyMapper.getBuyAreas(book_id));
+            buy.setImages(buyMapper.getBuyImages(book_id));
+        } catch (SQLException e) {
+            logger.debug("getBook() SQLException - "+e);
+            return buy;
+        }
+        return buy;
     }
 
     @Override
-    public HttpResponse updateBook(Buy book) {
+    public boolean updateBook(Buy book) {
         try {
             buyMapper.updateBuyInfo(book);
-        } catch (Exception e) {
-            return new HttpResponse(false, "데이터베이스 오류");
+        } catch (SQLException e) {
+            logger.debug("updateBook() SQLException - "+e);
+            return false;
         }
-        return new HttpResponse(true, "업데이트 성공");
+        return true;
     }
 
     @Override
-    public HttpResponse deleteBook(int buy_id) {
+    public boolean deleteBook(int book_id) {
         try {
-            buyMapper.deleteBuy(buy_id);
-        } catch (Exception e) {
-            return new HttpResponse(false, "데이터베이스 오류");
+            buyMapper.deleteBuy(book_id);
+            buyMapper.deleteBuyAreas(book_id);
+            buyMapper.deleteBuyImages(book_id);
+        } catch (SQLException e) {
+            logger.debug("deleteBook() SQLException - "+e);
+            return false;
         }
-        return new HttpResponse(true, "도서 정보 삭제 성공");
+        return true;
     }
 }

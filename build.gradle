@@ -23,6 +23,7 @@ def ver = [
         spring: '4.2.4.RELEASE',
         slf4j: '1.7.12',
         jackson: '2.8.8',
+        jackson_asl:'1.9.13',
         junit: '4.9',
         aspectj: '1.8.9'
 ]
@@ -73,6 +74,8 @@ dependencies {
 
     compile "com.fasterxml.jackson.core:jackson-core:${ver.jackson}",
             "com.fasterxml.jackson.core:jackson-databind:${ver.jackson}"
+
+    compile "org.codehaus.jackson:jackson-mapper-asl:${ver.jackson_asl}"
 }
 
 war {

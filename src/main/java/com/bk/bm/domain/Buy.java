@@ -23,10 +23,21 @@ public class Buy implements Serializable {
     private Date created_at;
     private Date updated_at;
 
-    private ArrayList<BuyArea> area;
-    private ArrayList<BuyImage> images;
+    private ArrayList<BuyArea> area = new ArrayList<>();
+    private ArrayList<BuyImage> images = new ArrayList<>();
 
     public Buy() {
+    }
+
+    public Buy(int uid, String isbn10, String isbn13, String title, int price_min, int price_max, boolean status, String comment) {
+        this.uid = uid;
+        this.isbn10 = isbn10;
+        this.isbn13 = isbn13;
+        this.title = title;
+        this.price_min = price_min;
+        this.price_max = price_max;
+        this.status = status;
+        this.comment = comment;
     }
 
     public Buy(int buy_id, int uid, String isbn10, String isbn13, String title, int price_min, int price_max, boolean status, String comment, Date created_at, Date updated_at) {

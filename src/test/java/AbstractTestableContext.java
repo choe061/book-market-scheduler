@@ -16,5 +16,5 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = {DatabaseConfig.class, MybatisConfig.class, BuyServiceImpl.class})
-public class AbstractTestableContext {
+public abstract class AbstractTestableContext {
 }

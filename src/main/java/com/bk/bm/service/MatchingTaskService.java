@@ -25,17 +25,17 @@ import java.util.HashMap;
  */
 
 @Service
-public class MatchingTaskServiceImpl {
+public class MatchingTaskService {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private final MatchingTaskMapper matchingTaskMapper;
 
     @Autowired
-    public MatchingTaskServiceImpl(MatchingTaskMapper matchingTaskMapper) {
+    public MatchingTaskService(MatchingTaskMapper matchingTaskMapper) {
         this.matchingTaskMapper = matchingTaskMapper;
     }
 
-    @Scheduled(cron = "0 0/1 * * * *")
+    @Scheduled(cron = "0 0/1 9-23 * * *")
     public void matchBookScheduler() {
         logger.debug("Scheduler start...");
         ArrayList<Matching> newMatchingBooks = matchingTaskMapper.getNewMatchingBooks();
@@ -60,7 +60,7 @@ public class MatchingTaskServiceImpl {
 
     private void sendFcmNewMatching(ArrayList<User> users) {
         for (User user : users) {
-            logger.debug(user.getUid()+", "+user.getFcm_token());
+            logger.debug("sendFcmNewMatching() User instance : "+user.getUid()+", "+user.getFcm_token());
         }
         //TODO Send FCM Message
         RestTemplate restTemplate = new RestTemplate();
