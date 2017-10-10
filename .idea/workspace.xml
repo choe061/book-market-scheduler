@@ -2,54 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="40eace7b-c732-47b3-984c-6feae9e24268" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/bk/bm/exception/DuplicateBookException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/bk/bm/exception/ServiceException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/bk/bm/util/BookValidator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/com/bk/bm/config/MybatisConfig.class" afterPath="$PROJECT_DIR$/build/classes/main/com/bk/bm/config/MybatisConfig.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/com/bk/bm/controller/BuyController.class" afterPath="$PROJECT_DIR$/build/classes/main/com/bk/bm/controller/BuyController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/com/bk/bm/domain/Buy.class" afterPath="$PROJECT_DIR$/build/classes/main/com/bk/bm/domain/Buy.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/com/bk/bm/domain/BuyArea.class" afterPath="$PROJECT_DIR$/build/classes/main/com/bk/bm/domain/BuyArea.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/com/bk/bm/domain/BuyImage.class" afterPath="$PROJECT_DIR$/build/classes/main/com/bk/bm/domain/BuyImage.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/com/bk/bm/domain/FcmObject.class" afterPath="$PROJECT_DIR$/build/classes/main/com/bk/bm/domain/FcmObject.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/com/bk/bm/domain/History.class" afterPath="$PROJECT_DIR$/build/classes/main/com/bk/bm/domain/History.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/com/bk/bm/domain/HttpResponse.class" afterPath="$PROJECT_DIR$/build/classes/main/com/bk/bm/domain/HttpResponse.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/com/bk/bm/domain/Matching.class" afterPath="$PROJECT_DIR$/build/classes/main/com/bk/bm/domain/Matching.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/com/bk/bm/domain/Message.class" afterPath="$PROJECT_DIR$/build/classes/main/com/bk/bm/domain/Message.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/com/bk/bm/domain/Sale.class" afterPath="$PROJECT_DIR$/build/classes/main/com/bk/bm/domain/Sale.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/com/bk/bm/domain/SaleArea.class" afterPath="$PROJECT_DIR$/build/classes/main/com/bk/bm/domain/SaleArea.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/com/bk/bm/domain/SaleImage.class" afterPath="$PROJECT_DIR$/build/classes/main/com/bk/bm/domain/SaleImage.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/com/bk/bm/domain/User.class" afterPath="$PROJECT_DIR$/build/classes/main/com/bk/bm/domain/User.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/com/bk/bm/persistence/BuyMapper.class" afterPath="$PROJECT_DIR$/build/classes/main/com/bk/bm/persistence/BuyMapper.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/com/bk/bm/persistence/MatchingTaskMapper.class" afterPath="$PROJECT_DIR$/build/classes/main/com/bk/bm/persistence/MatchingTaskMapper.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/com/bk/bm/service/BookService.class" afterPath="$PROJECT_DIR$/build/classes/main/com/bk/bm/service/BookService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/com/bk/bm/service/BuyServiceImpl.class" afterPath="$PROJECT_DIR$/build/classes/main/com/bk/bm/service/BuyServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/com/bk/bm/service/SaleServiceImpl.class" afterPath="$PROJECT_DIR$/build/classes/main/com/bk/bm/service/SaleServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/com/bk/bm/util/Constants.class" afterPath="$PROJECT_DIR$/build/classes/main/com/bk/bm/util/Constants.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/test/AbstractTestableContext.class" afterPath="$PROJECT_DIR$/build/classes/test/AbstractTestableContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/test/BuyServiceTest.class" afterPath="$PROJECT_DIR$/build/classes/test/BuyServiceTest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bk/bm/config/MybatisConfig.java" afterPath="$PROJECT_DIR$/src/main/java/com/bk/bm/config/MybatisConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bk/bm/controller/BuyController.java" afterPath="$PROJECT_DIR$/src/main/java/com/bk/bm/controller/BuyController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bk/bm/domain/Buy.java" afterPath="$PROJECT_DIR$/src/main/java/com/bk/bm/domain/Buy.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bk/bm/domain/BuyArea.java" afterPath="$PROJECT_DIR$/src/main/java/com/bk/bm/domain/BuyArea.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bk/bm/domain/BuyImage.java" afterPath="$PROJECT_DIR$/src/main/java/com/bk/bm/domain/BuyImage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bk/bm/domain/FcmObject.java" afterPath="$PROJECT_DIR$/src/main/java/com/bk/bm/domain/FcmObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bk/bm/domain/History.java" afterPath="$PROJECT_DIR$/src/main/java/com/bk/bm/domain/History.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bk/bm/domain/HttpResponse.java" afterPath="$PROJECT_DIR$/src/main/java/com/bk/bm/domain/HttpResponse.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bk/bm/domain/Matching.java" afterPath="$PROJECT_DIR$/src/main/java/com/bk/bm/domain/Matching.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bk/bm/domain/Message.java" afterPath="$PROJECT_DIR$/src/main/java/com/bk/bm/domain/Message.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bk/bm/domain/Sale.java" afterPath="$PROJECT_DIR$/src/main/java/com/bk/bm/domain/Sale.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bk/bm/domain/SaleArea.java" afterPath="$PROJECT_DIR$/src/main/java/com/bk/bm/domain/SaleArea.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bk/bm/domain/SaleImage.java" afterPath="$PROJECT_DIR$/src/main/java/com/bk/bm/domain/SaleImage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bk/bm/domain/User.java" afterPath="$PROJECT_DIR$/src/main/java/com/bk/bm/domain/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bk/bm/persistence/BuyMapper.java" afterPath="$PROJECT_DIR$/src/main/java/com/bk/bm/persistence/BuyMapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bk/bm/persistence/MatchingTaskMapper.java" afterPath="$PROJECT_DIR$/src/main/java/com/bk/bm/persistence/MatchingTaskMapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bk/bm/service/BookService.java" afterPath="$PROJECT_DIR$/src/main/java/com/bk/bm/service/BookService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bk/bm/service/BuyServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/bk/bm/service/BuyServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bk/bm/service/SaleServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/bk/bm/service/SaleServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/AbstractTestableContext.java" afterPath="$PROJECT_DIR$/src/test/java/AbstractTestableContext.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/BuyServiceTest.java" afterPath="$PROJECT_DIR$/src/test/java/BuyServiceTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -92,11 +45,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BuyServiceImpl.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BuyServiceImpl.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/bk/bm/service/BuyServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
-              <caret line="49" column="23" lean-forward="true" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
+            <state relative-caret-position="307">
+              <caret line="44" column="13" lean-forward="true" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -114,7 +67,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BuyServiceTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BuyServiceTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/BuyServiceTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="293">
@@ -625,8 +578,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/bk/bm/service/BookService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bk/bm/service/SaleServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bk/bm/persistence/BuyMapper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bk/bm/service/BuyServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/test/java/BuyServiceTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bk/bm/service/BuyServiceImpl.java" />
       </list>
     </option>
   </component>
@@ -1644,7 +1597,7 @@
       <workItem from="1506700635844" duration="548000" />
       <workItem from="1506754892862" duration="6302000" />
       <workItem from="1507199495986" duration="10290000" />
-      <workItem from="1507217976907" duration="29743000" />
+      <workItem from="1507217976907" duration="29870000" />
     </task>
     <servers />
   </component>
@@ -1681,7 +1634,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80105000" />
+    <option name="totallyTimeSpent" value="80232000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="845" extended-state="6" />
@@ -2145,16 +2098,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bk/bm/service/BuyServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="49" column="23" lean-forward="true" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/bk/bm/controller/BuyController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="172">
@@ -2168,6 +2111,16 @@
         <state relative-caret-position="293">
           <caret line="35" column="5" lean-forward="true" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bk/bm/service/BuyServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="44" column="13" lean-forward="true" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

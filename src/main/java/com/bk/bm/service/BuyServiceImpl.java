@@ -40,7 +40,7 @@ public class BuyServiceImpl implements BookService<Buy> {
         Buy buy = null;
         try {
             int buy_id = duplicateBook(uid, book.getIsbn10(), book.getIsbn13());
-            if (buy_id == -1) {
+            if (buy_id != -1) {
                 throw new DuplicateBookException();
             }
             buy_id = buyMapper.insertBuyBook(book);
