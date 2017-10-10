@@ -3,6 +3,7 @@ package com.bk.bm.controller;
 import com.bk.bm.domain.Buy;
 import com.bk.bm.domain.HttpResponse;
 import com.bk.bm.domain.User;
+import com.bk.bm.exception.DuplicateBookException;
 import com.bk.bm.service.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,12 +32,17 @@ public class BuyController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Buy> createBuyBook(@RequestBody Buy buy) {
-        Buy responseBook = buyService.createBook(buy);
-        if (responseBook != null) {
-            return new ResponseEntity<Buy>(responseBook, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<Buy>(responseBook, HttpStatus.NO_CONTENT);
+    public ResponseEntity<Buy> createBuyBook(@RequestHeader(value = "") int uid, @RequestBody Buy buy) {
+        Buy responseBook = null;
+        try {
+            responseBook = buyService.createBook(uid, buy);
+            if (responseBook != null) {
+                return new ResponseEntity<Buy>(responseBook, HttpStatus.CREATED);
+            } else {
+                return new ResponseEntity<Buy>(responseBook, HttpStatus.NO_CONTENT);
+            }
+        } catch (DuplicateBookException e) {
+            return new ResponseEntity<Buy>(responseBook, HttpStatus.CONFLICT);
         }
     }
 
@@ -63,7 +69,7 @@ public class BuyController {
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity updateBuyInfo(@RequestBody Buy buy) {
         if (buyService.updateBook(buy)) {
-            return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity(HttpStatus.RESET_CONTENT);
         } else {
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }

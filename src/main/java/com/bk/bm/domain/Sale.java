@@ -2,6 +2,7 @@ package com.bk.bm.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.sql.Date;
@@ -11,6 +12,7 @@ import java.sql.Date;
  */
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class Sale {
 
@@ -22,7 +24,6 @@ public class Sale {
     private int price;
     private ArrayList<SaleArea> area;
     private ArrayList<SaleImage> images;
-    private int status;
     private String comment;
     private Date created_at;
     private Date updated_at;

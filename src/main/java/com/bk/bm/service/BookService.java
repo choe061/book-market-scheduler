@@ -13,7 +13,7 @@ import java.util.ArrayList;
 @Transactional
 public interface BookService<T> {
 
-    T createBook(T book);
+    T createBook(int uid, T book);
 
     @Transactional(readOnly = true)
     ArrayList<T> getAllBooks(int uid);

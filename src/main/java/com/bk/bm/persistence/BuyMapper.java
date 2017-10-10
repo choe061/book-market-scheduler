@@ -3,7 +3,10 @@ package com.bk.bm.persistence;
 import com.bk.bm.domain.Buy;
 import com.bk.bm.domain.BuyArea;
 import com.bk.bm.domain.BuyImage;
+import com.bk.bm.exception.DuplicateBookException;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.binding.BindingException;
+import org.apache.ibatis.jdbc.SQL;
 import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
@@ -15,13 +18,19 @@ import java.util.ArrayList;
 @Repository
 public interface BuyMapper {
 
-    @Insert("INSERT INTO " +
-            "BUY(uid, isbn10, isbn13, title, price_min, price_max, status, comment) " +
-            "VALUES(#{uid}, #{isbn10}, #{isbn13}, #{title}, #{price_min}, #{price_max}, #{status}, #{comment})")
-    @SelectKey(statement = "SELECT buy_id FROM BUY", keyProperty = "buy_id", resultType = int.class, before = true)
-    int insertBuyBook(Buy buy) throws SQLException;
+    @Select("SELECT buy_id FROM BUY WHERE buy_uid=#{uid} AND (isbn10=#{isbn10} OR isbn13=#{isbn13})")
+    int duplicateBuyBook(@Param("uid") int uid,
+                         @Param("isbn10") String isbn10,
+                         @Param("isbn13") String isbn13) throws BindingException;
 
-    @Select("SELECT * FROM BUY WHERE uid=#{uid}")
+    @Insert("INSERT INTO " +
+            "BUY(buy_uid, isbn10, isbn13, title, price_min, price_max, status, comment) " +
+            "VALUES(#{buy.buy_uid}, #{buy.isbn10}, #{buy.isbn13}, #{buy.title}," +
+            " #{buy.price_min}, #{buy.price_max}, #{buy.comment})")
+    @SelectKey(statement = "SELECT buy_id FROM BUY", keyProperty = "buy_id", resultType = int.class, before = true)
+    int insertBuyBook(@Param("buy") Buy buy) throws SQLException;
+
+    @Select("SELECT * FROM BUY WHERE buy_uid=#{uid}")
     ArrayList<Buy> getAllBuy(@Param("uid") int uid) throws SQLException;
 
     @Select("SELECT * FROM BUY WHERE buy_id=#{buy_id}")

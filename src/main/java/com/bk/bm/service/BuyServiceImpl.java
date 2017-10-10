@@ -1,7 +1,9 @@
 package com.bk.bm.service;
 
 import com.bk.bm.domain.Buy;
+import com.bk.bm.exception.DuplicateBookException;
 import com.bk.bm.persistence.BuyMapper;
+import org.apache.ibatis.binding.BindingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +26,24 @@ public class BuyServiceImpl implements BookService<Buy> {
         this.buyMapper = buyMapper;
     }
 
+    public int duplicateBook(int uid, String isbn10, String isbn13) {
+        try {
+            int id = buyMapper.duplicateBuyBook(uid, isbn10, isbn13);
+            return id;
+        } catch (BindingException e) {
+            return -1;
+        }
+    }
+
     @Override
-    public Buy createBook(Buy book) {
+    public Buy createBook(int uid, Buy book) {
         Buy buy = null;
         try {
-            int buy_id = buyMapper.insertBuyBook(book);
+            int buy_id = duplicateBook(uid, book.getIsbn10(), book.getIsbn13());
+            if (buy_id == -1) {
+                throw new DuplicateBookException();
+            }
+            buy_id = buyMapper.insertBuyBook(book);
             buy = buyMapper.getBuy(buy_id);
         } catch (SQLException e) {
             logger.debug("createBook() SQLException - "+e);

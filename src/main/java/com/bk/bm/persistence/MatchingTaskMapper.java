@@ -27,7 +27,6 @@ public interface MatchingTaskMapper {
             "LEFT JOIN MATCHING AS m " +
             "ON m.sale_id = s.sale_id AND m.buy_id = b.buy_id " +
             "WHERE m.sale_id IS NULL OR m.buy_id IS NULL")
-    @ResultType(Matching.class)
     ArrayList<Matching> getNewMatchingBooks();
 
     @Insert({

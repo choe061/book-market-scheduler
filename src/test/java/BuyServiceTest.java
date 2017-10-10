@@ -1,11 +1,14 @@
 import com.bk.bm.domain.Buy;
+import com.bk.bm.persistence.BuyMapper;
 import com.bk.bm.service.BookService;
+import com.bk.bm.service.BuyServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertTrue;
@@ -26,8 +29,8 @@ public class BuyServiceTest extends AbstractTestableContext {
 
     @Test
     public void createBuy() {
-        Buy buy = new Buy(1, "123123", "13123", "테스트책", 10000, 15000, false, "상태 등...");
-        Buy book = bookService.createBook(buy);
+        Buy buy = new Buy(1, "123123", "13123", "테스트책", 10000, 15000, "상태 등...");
+        Buy book = bookService.createBook(1, buy);
         logger.debug("BUY BOOK instance : "+book);
         assertTrue(book instanceof Buy);
     }
@@ -41,4 +44,5 @@ public class BuyServiceTest extends AbstractTestableContext {
         logger.debug("BUY created_at : "+String.valueOf(buy.getCreated_at()));
         assertTrue(buy instanceof Buy);
     }
+
 }

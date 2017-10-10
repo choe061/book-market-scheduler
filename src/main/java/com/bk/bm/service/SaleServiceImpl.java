@@ -22,7 +22,7 @@ public class SaleServiceImpl implements BookService<Sale> {
     }
 
     @Override
-    public Sale createBook(Sale book) {
+    public Sale createBook(int uid, Sale book) {
         return null;
     }
 

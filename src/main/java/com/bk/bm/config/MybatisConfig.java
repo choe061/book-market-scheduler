@@ -27,7 +27,10 @@ public class MybatisConfig {
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
         sqlSessionFactory.setDataSource(dataSource);
         sqlSessionFactory.setTypeAliasesPackage("com.bk.bm.domain");
-        sqlSessionFactory.setTypeHandlers(new TypeHandler[]{new VarcharTypeHandler(), new DateTypeHandler()});
+        sqlSessionFactory.setTypeHandlers(new TypeHandler[]{
+                new VarcharTypeHandler(),
+                new DateTypeHandler()
+        });
         return sqlSessionFactory.getObject();
     }
 
