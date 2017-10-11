@@ -1,8 +1,5 @@
 package com.bk.bm.service;
 
-import com.bk.bm.domain.HttpResponse;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;

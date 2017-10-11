@@ -1,4 +1,15 @@
-# Database config and API Key #
-*.properties
+# Database configuration and API private Key #
+/src/main/resources/database.properties
 /src/main/java/com/bk/bm/util/Constants.java
 
+# IntelliJ IDEA #
+.idea
+*.iws
+*.iml
+*.ipr
+
+# Gradle files #
+.gradle
+/build/
+/out/
+!gradle/wrapper/gradle-wrapper.jar

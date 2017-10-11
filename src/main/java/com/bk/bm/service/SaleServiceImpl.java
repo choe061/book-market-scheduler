@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Created by choi on 2017. 10. 2. PM 9:01.
  */
-@Service("SaleService")
+@Service("saleService")
 public class SaleServiceImpl implements BookService<Sale> {
 
     private final SaleMapper saleMapper;

@@ -37,19 +37,16 @@ public class BuyServiceImpl implements BookService<Buy> {
 
     @Override
     public Buy createBook(int uid, Buy book) {
-        Buy buy = null;
         try {
-            int buy_id = duplicateBook(uid, book.getIsbn10(), book.getIsbn13());
-            if (buy_id != -1) {
+            if (duplicateBook(uid, book.getIsbn10(), book.getIsbn13()) != -1) {
                 throw new DuplicateBookException();
             }
-            buy_id = buyMapper.insertBuyBook(book);
-            buy = buyMapper.getBuy(buy_id);
+            int buy_id = buyMapper.insertBuyBook(book);
+            return buyMapper.getBuy(buy_id);
         } catch (SQLException e) {
             logger.debug("createBook() SQLException - "+e);
-            return buy;
+            return null;
         }
-        return buy;
     }
 
     @Override

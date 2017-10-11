@@ -31,23 +31,39 @@ public class BuyController {
         this.buyService = buyService;
     }
 
+    /**
+     * 구매할 책을 등록하는 API
+     * @param uid
+     * @param buy
+     * @return Buy
+     * 201 - 등록 성공
+     * 409 - 유저가 같은 책을 등록한 적이 있음
+     * 500 - 서버 에러, 데이터베이스 에러
+     */
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Buy> createBuyBook(@RequestHeader(value = "") int uid, @RequestBody Buy buy) {
+    public ResponseEntity<Buy> createBuyBook(@RequestHeader(value = "Authorization") int uid, @RequestBody Buy buy) {
         Buy responseBook = null;
         try {
             responseBook = buyService.createBook(uid, buy);
             if (responseBook != null) {
                 return new ResponseEntity<Buy>(responseBook, HttpStatus.CREATED);
             } else {
-                return new ResponseEntity<Buy>(responseBook, HttpStatus.NO_CONTENT);
+                return new ResponseEntity<Buy>(responseBook, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         } catch (DuplicateBookException e) {
             return new ResponseEntity<Buy>(responseBook, HttpStatus.CONFLICT);
         }
     }
 
-    @RequestMapping(value = "/all/{uid}", method = RequestMethod.GET)
-    public ResponseEntity<ArrayList<Buy>> getAllBuy(@PathVariable int uid) {
+    /**
+     * 유저가 등록한 모든 책 조회
+     * @param uid
+     * @return ArrayList<Buy>
+     * 200 - 조회 성공
+     * 204 - 유저가 등록한 책이 없음
+     */
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    public ResponseEntity<ArrayList<Buy>> getAllBuy(@RequestHeader(value = "Authorization") int uid) {
         ArrayList<Buy> responseBooks = buyService.getAllBooks(uid);
         if (!responseBooks.isEmpty()) {
             return new ResponseEntity<ArrayList<Buy>>(responseBooks, HttpStatus.OK);
@@ -56,6 +72,13 @@ public class BuyController {
         }
     }
 
+    /**
+     * 유저가 등록한 책 중 하나를 조회
+     * @param buy_id
+     * @return Buy
+     * 200 - 조회 성공
+     * 204 - 등록되지 않은 책 or 조회 실패
+     */
     @RequestMapping(value = "/{buy_id}", method = RequestMethod.GET)
     public ResponseEntity<Buy> getBuy(@PathVariable int buy_id) {
         Buy responseBook = buyService.getBook(buy_id);
@@ -66,6 +89,13 @@ public class BuyController {
         }
     }
 
+    /**
+     * 등록한 도서 정보를 전체 수정
+     * @param buy
+     * @return Status Code
+     * 205 - 수정 성공
+     * 500 - 수정 실패
+     */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity updateBuyInfo(@RequestBody Buy buy) {
         if (buyService.updateBook(buy)) {
@@ -75,6 +105,13 @@ public class BuyController {
         }
     }
 
+    /**
+     * 등록한 도서 정보 삭제
+     * @param buy_id
+     * @return Status Code
+     * 200 - 삭제 성공
+     * 500 - 삭제 실패
+     */
     @RequestMapping(value = "/{buy_id}", method = RequestMethod.DELETE)
     public ResponseEntity deleteBuy(@PathVariable int buy_id) {
         if (buyService.deleteBook(buy_id)) {

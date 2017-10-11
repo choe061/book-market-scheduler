@@ -15,6 +15,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import java.util.HashMap;
  */
 
 @Service
+@Transactional
 public class MatchingTaskService {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -35,7 +37,7 @@ public class MatchingTaskService {
         this.matchingTaskMapper = matchingTaskMapper;
     }
 
-    @Scheduled(cron = "0 0/1 9-23 * * *")
+    @Scheduled(cron = "0 0/30 9-23 * * *")
     public void matchBookScheduler() {
         logger.debug("Scheduler start...");
         ArrayList<Matching> newMatchingBooks = matchingTaskMapper.getNewMatchingBooks();
@@ -59,10 +61,6 @@ public class MatchingTaskService {
     }
 
     private void sendFcmNewMatching(ArrayList<User> users) {
-        for (User user : users) {
-            logger.debug("sendFcmNewMatching() User instance : "+user.getUid()+", "+user.getFcm_token());
-        }
-        //TODO Send FCM Message
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
