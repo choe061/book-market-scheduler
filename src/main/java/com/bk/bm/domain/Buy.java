@@ -53,5 +53,7 @@ public class Buy implements Serializable {
         this.comment = comment;
         this.created_at = created_at;
         this.updated_at = updated_at;
+        this.area = new ArrayList<>();
+        this.images = new ArrayList<>();
     }
 }

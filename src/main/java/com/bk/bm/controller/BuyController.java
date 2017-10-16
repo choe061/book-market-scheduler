@@ -37,7 +37,7 @@ public class BuyController {
      * @param buy
      * @return Buy
      * 201 - 등록 성공
-     * 409 - 유저가 같은 책을 등록한 적이 있음
+     * 409 - DuplicateBookException
      * 500 - 서버 에러, 데이터베이스 에러
      */
     @RequestMapping(method = RequestMethod.POST)

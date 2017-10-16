@@ -1,9 +1,12 @@
 package com.bk.bm.service;
 
 import com.bk.bm.domain.Buy;
+import com.bk.bm.domain.BuyArea;
+import com.bk.bm.domain.BuyImage;
 import com.bk.bm.exception.DuplicateBookException;
 import com.bk.bm.persistence.BuyMapper;
-import org.apache.ibatis.binding.BindingException;
+import com.bk.bm.util.BookValidator;
+import com.bk.bm.util.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,51 +30,28 @@ public class BuyServiceImpl implements BookService<Buy> {
     }
 
     public int duplicateBook(int uid, String isbn10, String isbn13) {
-        try {
-            int id = buyMapper.duplicateBuyBook(uid, isbn10, isbn13);
-            return id;
-        } catch (BindingException e) {
-            return -1;
-        }
+        return buyMapper.duplicateBuyBook(uid, isbn10, isbn13);
     }
 
     @Override
     public Buy createBook(int uid, Buy book) {
-        try {
-            if (duplicateBook(uid, book.getIsbn10(), book.getIsbn13()) != -1) {
-                throw new DuplicateBookException();
-            }
-            int buy_id = buyMapper.insertBuyBook(book);
-            return buyMapper.getBuy(buy_id);
-        } catch (SQLException e) {
-            logger.debug("createBook() SQLException - "+e);
-            return null;
+        if (duplicateBook(uid, book.getIsbn10(), book.getIsbn13()) != BookValidator.NOT_EXIST_BOOK) {
+            throw new DuplicateBookException();
         }
+        int buy_id = buyMapper.insertBuyBook(uid, book);
+        return this.getBook(buy_id);
     }
 
     @Override
     public ArrayList<Buy> getAllBooks(int uid) {
-        ArrayList<Buy> books = new ArrayList<>();
-        try {
-            books = buyMapper.getAllBuy(uid);
-        } catch (SQLException e) {
-            logger.debug("getAllBooks() SQLException - "+e);
-            return books;
-        }
-        return books;
+        return buyMapper.getAllBuy(uid);
     }
 
     @Override
     public Buy getBook(int book_id) {
-        Buy buy = null;
-        try {
-            buy = buyMapper.getBuy(book_id);
-            buy.setArea(buyMapper.getBuyAreas(book_id));
-            buy.setImages(buyMapper.getBuyImages(book_id));
-        } catch (SQLException e) {
-            logger.debug("getBook() SQLException - "+e);
-            return buy;
-        }
+        Buy buy = buyMapper.getBuy(book_id);
+        buy.setArea(buyMapper.getBuyAreas(book_id));
+        buy.setImages(buyMapper.getBuyImages(book_id));
         return buy;
     }
 
@@ -79,8 +59,8 @@ public class BuyServiceImpl implements BookService<Buy> {
     public boolean updateBook(Buy book) {
         try {
             buyMapper.updateBuyInfo(book);
-        } catch (SQLException e) {
-            logger.debug("updateBook() SQLException - "+e);
+        } catch (Exception e) {
+            logger.debug("updateBook() Exception - "+e);
             return false;
         }
         return true;
@@ -92,8 +72,8 @@ public class BuyServiceImpl implements BookService<Buy> {
             buyMapper.deleteBuy(book_id);
             buyMapper.deleteBuyAreas(book_id);
             buyMapper.deleteBuyImages(book_id);
-        } catch (SQLException e) {
-            logger.debug("deleteBook() SQLException - "+e);
+        } catch (Exception e) {
+            logger.debug("deleteBook() Exception - "+e);
             return false;
         }
         return true;
