@@ -1,15 +1,10 @@
 import com.bk.bm.domain.Buy;
-import com.bk.bm.persistence.BuyMapper;
 import com.bk.bm.service.BookService;
-import com.bk.bm.service.BuyServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.sql.SQLException;
-import java.util.ArrayList;
 
 import static org.junit.Assert.assertTrue;
 

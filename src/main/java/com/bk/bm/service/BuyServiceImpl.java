@@ -1,18 +1,14 @@
 package com.bk.bm.service;
 
 import com.bk.bm.domain.Buy;
-import com.bk.bm.domain.BuyArea;
-import com.bk.bm.domain.BuyImage;
 import com.bk.bm.exception.DuplicateBookException;
 import com.bk.bm.persistence.BuyMapper;
 import com.bk.bm.util.BookValidator;
-import com.bk.bm.util.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -30,7 +26,7 @@ public class BuyServiceImpl implements BookService<Buy> {
     }
 
     public int duplicateBook(int uid, String isbn10, String isbn13) {
-        return buyMapper.duplicateBuyBook(uid, isbn10, isbn13);
+        return buyMapper.duplicateBook(uid, isbn10, isbn13);
     }
 
     @Override

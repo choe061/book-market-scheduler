@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bk.bm.persistence.BuyMapper">
+
+    <select id="duplicateBook" resultType="int">
+        SELECT COUNT(buy_id)
+        FROM BUY
+        WHERE buy_uid=#{uid} AND (isbn10=#{isbn10} OR isbn13=#{isbn13})
+    </select>
+
+    <insert id="insertBuyBook" parameterType="com.bk.bm.domain.Buy">
+        INSERT INTO BUY(buy_uid, isbn10, isbn13, title, price_min, price_max, comment)
+        VALUES(#{uid}, #{buy.isbn10}, #{buy.isbn13}, #{buy.title},
+         #{buy.price_min}, #{buy.price_max}, #{buy.comment})
+        <selectKey resultType="int" keyProperty="buy_id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <select id="getAllBuy" resultType="hashmap">
+        SELECT * FROM BUY WHERE buy_uid=#{uid}
+    </select>
+
+    <select id="getBuy" resultType="com.bk.bm.domain.Buy">
+        SELECT * FROM BUY WHERE buy_id=${buy_id}
+    </select>
+
+    <select id="getBuyAreas" resultType="hashmap">
+        SELECT * FROM BUY_AREA WHERE buy_id=#{buy_id}
+    </select>
+
+    <select id="getBuyImages" resultType="hashmap">
+        SELECT * FROM BUY_IMAGE WHERE buy_id=#{buy_id}
+    </select>
+
+    <update id="updateBuyInfo">
+        UPDATE BUY
+        SET isbn10=#{buy.isbn10}, isbn13=#{buy.isbn13}, title=#{buy.title},
+         price_min=#{buy.price_min}, price_max=#{buy.price_max}, comment=#{buy.comment}
+        WHERE buy_id=#{buy.buy_id}
+    </update>
+
+    <delete id="deleteBuy">
+        DELETE FROM BUY WHERE buy_id
+    </delete>
+
+    <delete id="deleteBuyAreas">
+        DELETE FROM BUY_AREA WHERE buy_id=#{buy_id}
+    </delete>
+
+    <delete id="deleteBuyImages">
+        DELETE FROM BUY_IMAGE WHERE buy_id=#{buy_id}
+    </delete>
+
+</mapper>
