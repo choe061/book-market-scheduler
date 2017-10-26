@@ -18,6 +18,22 @@
         </selectKey>
     </insert>
 
+    <insert id="insertBuyAreas">
+        INSERT INTO BUY_AREA(buy_area_id, area, buy_id)
+        VALUES
+        <foreach collection='buy_areas' item='areas' separator=','>
+            (#{uid, jdbcType=INTEGER}, #{areas.area, jdbcType=VARCHAR, #{buy_id})
+        </foreach>
+    </insert>
+
+    <insert id="insertBuyImages">
+        INSERT INTO BUY_IMAGE(buy_img_id, image_url, buy_id)
+        VALUES
+        <foreach collection='buy_images' item='images' separator=','>
+            (#{uid, jdbcType=INTEGER}, #{images.image_url, jdbcType=VARCHAR, #{buy_id})
+        </foreach>
+    </insert>
+
     <select id="getAllBuy" resultType="hashmap">
         SELECT * FROM BUY WHERE buy_uid=#{uid}
     </select>
@@ -34,7 +50,7 @@
         SELECT * FROM BUY_IMAGE WHERE buy_id=#{buy_id}
     </select>
 
-    <update id="updateBuyInfo">
+    <update id="updateBuy">
         UPDATE BUY
         SET isbn10=#{buy.isbn10}, isbn13=#{buy.isbn13}, title=#{buy.title},
          price_min=#{buy.price_min}, price_max=#{buy.price_max}, comment=#{buy.comment}

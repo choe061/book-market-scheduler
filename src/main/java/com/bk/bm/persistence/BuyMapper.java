@@ -1,8 +1,6 @@
 package com.bk.bm.persistence;
 
-import com.bk.bm.domain.Buy;
-import com.bk.bm.domain.BuyArea;
-import com.bk.bm.domain.BuyImage;
+import com.bk.bm.domain.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +17,12 @@ public interface BuyMapper {
                          @Param("isbn13") String isbn13);
 
     int insertBuyBook(@Param("uid") int uid, @Param("buy") Buy buy);
+    void insertBuyAreas(@Param("uid") int uid,
+                        @Param("buy_id") int buy_id,
+                        @Param("buy_areas") ArrayList<BuyArea> buyAreas);
+    void insertBuyImages(@Param("uid") int uid,
+                         @Param("buy_id") int buy_id,
+                         @Param("buy_images") ArrayList<BuyImage> buyImages);
 
     ArrayList<Buy> getAllBuy(@Param("uid") int uid);
 
@@ -28,12 +32,10 @@ public interface BuyMapper {
 
     ArrayList<BuyImage> getBuyImages(@Param("buy_id") int buy_id);
 
-    void updateBuyInfo(@Param("buy") Buy buy);
+    void updateBuy(@Param("buy") Buy buy);
 
     void deleteBuy(@Param("buy_id") int buy_id);
-
     void deleteBuyAreas(@Param("buy_id") int buy_id);
-
     void deleteBuyImages(@Param("buy_id") int buy_id);
 
 }

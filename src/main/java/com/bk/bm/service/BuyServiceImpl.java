@@ -7,6 +7,7 @@ import com.bk.bm.util.BookValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -35,6 +36,8 @@ public class BuyServiceImpl implements BookService<Buy> {
             throw new DuplicateBookException();
         }
         int buy_id = buyMapper.insertBuyBook(uid, book);
+        buyMapper.insertBuyAreas(uid, buy_id, book.getArea());
+        buyMapper.insertBuyImages(uid, buy_id, book.getImages());
         return this.getBook(buy_id);
     }
 
@@ -54,9 +57,15 @@ public class BuyServiceImpl implements BookService<Buy> {
     @Override
     public boolean updateBook(Buy book) {
         try {
-            buyMapper.updateBuyInfo(book);
-        } catch (Exception e) {
-            logger.debug("updateBook() Exception - "+e);
+            buyMapper.updateBuy(book);
+
+            buyMapper.deleteBuyAreas(book.getBuy_id());
+            buyMapper.deleteBuyImages(book.getBuy_id());
+
+            buyMapper.insertBuyAreas(book.getBuy_uid(), book.getBuy_id(), book.getArea());
+            buyMapper.insertBuyImages(book.getBuy_uid(), book.getBuy_id(), book.getImages());
+        } catch (DataAccessException e) {
+            logger.debug("updateBook() DataAccessException - "+e.getMessage());
             return false;
         }
         return true;
@@ -68,8 +77,8 @@ public class BuyServiceImpl implements BookService<Buy> {
             buyMapper.deleteBuy(book_id);
             buyMapper.deleteBuyAreas(book_id);
             buyMapper.deleteBuyImages(book_id);
-        } catch (Exception e) {
-            logger.debug("deleteBook() Exception - "+e);
+        } catch (DataAccessException e) {
+            logger.debug("deleteBook() DataAccessException - "+e.getMessage());
             return false;
         }
         return true;
