@@ -16,15 +16,16 @@ import java.sql.Date;
 @AllArgsConstructor
 public class Sale {
 
-    private int id;
-    private int uid;
+    private int sale_id;
+    private int sale_uid;
     private String isbn10;
     private String isbn13;
     private String title;
     private int price;
-    private ArrayList<SaleArea> area;
-    private ArrayList<SaleImage> images;
     private String comment;
     private Date created_at;
     private Date updated_at;
+
+    private ArrayList<SaleArea> area;
+    private ArrayList<SaleImage> images;
 }

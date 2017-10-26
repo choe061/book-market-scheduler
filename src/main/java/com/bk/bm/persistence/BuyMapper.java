@@ -3,10 +3,7 @@ package com.bk.bm.persistence;
 import com.bk.bm.domain.Buy;
 import com.bk.bm.domain.BuyArea;
 import com.bk.bm.domain.BuyImage;
-import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
