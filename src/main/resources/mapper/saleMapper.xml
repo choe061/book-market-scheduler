@@ -6,19 +6,19 @@
     <select id="duplicateBook" resultType="int">
         SELECT COUNT(sale_id)
         FROM SALE
-        WHERE buy_uid=#{uid} AND (isbn10=#{isbn10} OR isbn13=#{isbn13})
+        WHERE sale_uid=#{uid} AND (isbn10=#{isbn10} OR isbn13=#{isbn13})
     </select>
 
     <insert id="insertSaleBook" parameterType="com.bk.bm.domain.Sale">
         INSERT INTO SALE(sale_uid, isbn10, isbn13, title, price, comment)
-        VALUES(#{uid}, #{sale.isbn10}, #{sale.isbn13}, #{sale.title}, #{sale.price}, #{buy.comment})
+        VALUES(#{uid}, #{sale.isbn10}, #{sale.isbn13}, #{sale.title}, #{sale.price}, #{sale.comment})
         <selectKey resultType="int" keyProperty="sale_id" order="AFTER">
             SELECT LAST_INSERT_ID()
         </selectKey>
     </insert>
 
     <insert id="insertSaleAreas">
-        INSERT INTO SALE_AREA(buy_area_id, area, sale_id)
+        INSERT INTO SALE_AREA(sale_area_id, area, sale_id)
         VALUES
         <foreach collection='sale_areas' item='areas' separator=','>
             (#{uid, jdbcType=INTEGER}, #{areas.area, jdbcType=VARCHAR, #{sale_id})
@@ -34,19 +34,19 @@
     </insert>
 
     <select id="getAllSale" resultType="hashmap">
-        SELECT * FROM SALE WHERE buy_uid=#{uid}
+        SELECT * FROM SALE WHERE sale_uid=#{uid}
     </select>
 
     <select id="getSale" resultType="com.bk.bm.domain.Sale">
-        SELECT * FROM SALE WHERE buy_id=${sale_id}
+        SELECT * FROM SALE WHERE sale_id=${sale_id}
     </select>
 
     <select id="getSaleAreas" resultType="hashmap">
-        SELECT * FROM SALE_AREA WHERE buy_id=#{sale_id}
+        SELECT * FROM SALE_AREA WHERE sale_id=#{sale_id}
     </select>
 
     <select id="getSaleImages" resultType="hashmap">
-        SELECT * FROM SALE_IMAGE WHERE buy_id=#{sale_id}
+        SELECT * FROM SALE_IMAGE WHERE sale_id=#{sale_id}
     </select>
 
     <update id="updateSale">
