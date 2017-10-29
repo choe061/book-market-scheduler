@@ -27,9 +27,7 @@ public interface BuyMapper {
     ArrayList<Buy> getAllBuy(@Param("uid") int uid);
 
     Buy getBuy(@Param("buy_id") int buy_id);
-
     ArrayList<BuyArea> getBuyAreas(@Param("buy_id") int buy_id);
-
     ArrayList<BuyImage> getBuyImages(@Param("buy_id") int buy_id);
 
     void updateBuy(@Param("buy") Buy buy);

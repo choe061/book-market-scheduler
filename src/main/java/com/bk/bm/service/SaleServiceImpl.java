@@ -55,7 +55,12 @@ public class SaleServiceImpl implements BookService<Sale> {
     @Override
     public boolean updateBook(Sale book) {
         try {
+            saleMapper.deleteSaleAreas(book.getSale_id());
+            saleMapper.deleteSaleImages(book.getSale_id());
+
             saleMapper.updateSale(book);
+            saleMapper.insertSaleAreas(book.getSale_uid(), book.getSale_id(), book.getArea());
+            saleMapper.insertSaleImages(book.getSale_uid(), book.getSale_id(), book.getImages());
         } catch (DataAccessException dae) {
             logger.debug("updateBook() DataAccessException - "+dae.getMessage());
             return false;

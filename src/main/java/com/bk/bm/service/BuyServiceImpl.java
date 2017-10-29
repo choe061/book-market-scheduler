@@ -57,11 +57,10 @@ public class BuyServiceImpl implements BookService<Buy> {
     @Override
     public boolean updateBook(Buy book) {
         try {
-            buyMapper.updateBuy(book);
-
             buyMapper.deleteBuyAreas(book.getBuy_id());
             buyMapper.deleteBuyImages(book.getBuy_id());
 
+            buyMapper.updateBuy(book);
             buyMapper.insertBuyAreas(book.getBuy_uid(), book.getBuy_id(), book.getArea());
             buyMapper.insertBuyImages(book.getBuy_uid(), book.getBuy_id(), book.getImages());
         } catch (DataAccessException e) {
