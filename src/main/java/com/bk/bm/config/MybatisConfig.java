@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 @MapperScan(
-        basePackages = {"com.bk.bm.persistence"}
+        basePackages = {"com.bk.bm.repository"}
 )
 public class MybatisConfig {
 

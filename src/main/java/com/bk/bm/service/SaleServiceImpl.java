@@ -2,13 +2,12 @@ package com.bk.bm.service;
 
 import com.bk.bm.domain.Sale;
 import com.bk.bm.exception.DuplicateBookException;
-import com.bk.bm.persistence.SaleMapper;
+import com.bk.bm.repository.SaleMapper;
 import com.bk.bm.util.BookValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

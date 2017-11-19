@@ -1,4 +1,4 @@
-package com.bk.bm.persistence;
+package com.bk.bm.repository;
 
 import com.bk.bm.domain.*;
 import org.apache.ibatis.annotations.Param;
@@ -35,5 +35,9 @@ public interface BuyMapper {
     void deleteBuy(@Param("buy_id") int buy_id);
     void deleteBuyAreas(@Param("buy_id") int buy_id);
     void deleteBuyImages(@Param("buy_id") int buy_id);
+
+    void deleteFinishedDealOfBuy(@Param("matchings") ArrayList<Matching> matchings);
+    void deleteFinishedDealOfBuyAreas(@Param("matchings") ArrayList<Matching> matchings);
+    void deleteFinishedDealOfBuyImages(@Param("matchings") ArrayList<Matching> matchings);
 
 }

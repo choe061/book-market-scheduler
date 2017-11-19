@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.bk.bm.persistence.SaleMapper">
+<mapper namespace="com.bk.bm.repository.SaleMapper">
 
     <select id="duplicateBook" resultType="int">
         SELECT COUNT(sale_id)
@@ -37,6 +37,29 @@
         SELECT * FROM SALE WHERE sale_uid=#{uid}
     </select>
 
+    <select id="getFinishedDealOfSale" resultType="hashmap">
+        SELECT DISTINCT s.sale_id, s.sale_uid, b.buy_uid, s.isbn10, s.isbn13, s.title, s.price, s.comment, m.matched_at
+        FROM SALE s, BUY b, MATCHING m
+        WHERE (s.sale_id, b.buy_id)
+        IN (
+        <foreach collection="matchings" item="matching" separator=",">
+            (#{matching.sale_id, jdbcType=INTEGER}, #{matching.buy_id, jdbcType=INTEGER})
+        </foreach>
+        )
+    </select>
+
+    <select id="getFinishedDealOfSaleImages" resultType="hashmap">
+        SELECT a.image_url, m.sale_id
+        FROM SALE_AREA a, MATCHING m
+        WHERE a.sale_id IN
+        <foreach collection="matchings" item="matching" open="(" separator="," close=")">
+            #{matching.sale_id, jdbcType=INTEGER}
+        </foreach>
+    </select>
+
+    <select id="getFinishedDealOfSaleAreas" resultType="hashmap">
+    </select>
+
     <select id="getSale" resultType="com.bk.bm.domain.Sale">
         SELECT * FROM SALE WHERE sale_id=${sale_id}
     </select>
@@ -66,6 +89,28 @@
 
     <delete id="deleteSaleImages">
         DELETE FROM SALE_IMAGE WHERE sale_id=#{sale_id}
+    </delete>
+
+    <!-- 완료된 거래를 모두 삭제 -->
+    <delete id="deleteFinishedDealOfSale">
+        DELETE FROM SALE WHERE sale_id IN
+        <foreach collection="matchings" item="matching" open="(" separator="," close=")">
+            #{matching.sale_id, jdbcType=INTEGER}
+        </foreach>
+    </delete>
+
+    <delete id="deleteFinishedDealOfSaleAreas">
+        DELETE FROM SALE_AREA WHERE sale_id IN
+        <foreach collection="matchings" item="matching" open="(" separator="," close=")">
+            #{matching.sale_id, jdbcType=INTEGER}
+        </foreach>
+    </delete>
+
+    <delete id="deleteFinishedDealOfSaleImages">
+        DELETE FROM SALE_IMAGE WHERE sale_id IN
+        <foreach collection="matchings" item="matching" open="(" separator="," close=")">
+            #{matching.sale_id, jdbcType=INTEGER}
+        </foreach>
     </delete>
 
 </mapper>

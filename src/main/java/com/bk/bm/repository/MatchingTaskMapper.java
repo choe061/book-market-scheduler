@@ -1,11 +1,10 @@
-package com.bk.bm.persistence;
+package com.bk.bm.repository;
 
+import com.bk.bm.domain.History;
 import com.bk.bm.domain.Matching;
+import com.bk.bm.domain.SaleImage;
 import com.bk.bm.domain.User;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultType;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -20,6 +19,14 @@ import java.util.ArrayList;
 
 @Repository
 public interface MatchingTaskMapper {
+
+    ArrayList<Matching> getFinishedDealOfMatching();
+
+    void backupMatchingHistory(@Param("histories") ArrayList<History> histories);
+
+    void backupMatchingHistoryImage(@Param("images") ArrayList<SaleImage> images);
+
+    void deleteMatching(@Param("matchings") ArrayList<Matching> matchings);
 
     ArrayList<Matching> getNewMatchingBooks();
 

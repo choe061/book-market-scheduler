@@ -2,7 +2,7 @@ package com.bk.bm.service;
 
 import com.bk.bm.domain.Buy;
 import com.bk.bm.exception.DuplicateBookException;
-import com.bk.bm.persistence.BuyMapper;
+import com.bk.bm.repository.BuyMapper;
 import com.bk.bm.util.BookValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,10 +26,6 @@ public class BuyServiceImpl implements BookService<Buy> {
         this.buyMapper = buyMapper;
     }
 
-    public int duplicateBook(int uid, String isbn10, String isbn13) {
-        return buyMapper.duplicateBook(uid, isbn10, isbn13);
-    }
-
     @Override
     public Buy createBook(int uid, Buy book) {
         if (duplicateBook(uid, book.getIsbn10(), book.getIsbn13()) != BookValidator.NOT_EXIST_BOOK) {
@@ -39,6 +35,10 @@ public class BuyServiceImpl implements BookService<Buy> {
         buyMapper.insertBuyAreas(uid, buy_id, book.getArea());
         buyMapper.insertBuyImages(uid, buy_id, book.getImages());
         return this.getBook(buy_id);
+    }
+
+    private int duplicateBook(int uid, String isbn10, String isbn13) {
+        return buyMapper.duplicateBook(uid, isbn10, isbn13);
     }
 
     @Override

@@ -15,7 +15,7 @@ import java.sql.Date;
 public class History {
     private static final long serialVersionUID = 1L;
 
-    private int buy_id;
+    private int history_id;
     private int seller_uid;
     private int buyer_uid;
     private String isbn10;
@@ -23,6 +23,16 @@ public class History {
     private String title;
     private int price;
     private String comment;
-    private Date created_at;
-    private Date updated_at;
+    private Date matched_at;
+
+    public History(int seller_uid, int buyer_uid, String isbn10, String isbn13, String title, int price, String comment, Date matched_at) {
+        this.seller_uid = seller_uid;
+        this.buyer_uid = buyer_uid;
+        this.isbn10 = isbn10;
+        this.isbn13 = isbn13;
+        this.title = title;
+        this.price = price;
+        this.comment = comment;
+        this.matched_at = matched_at;
+    }
 }

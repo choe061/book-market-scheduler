@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.bk.bm.persistence.BuyMapper">
+<mapper namespace="com.bk.bm.repository.BuyMapper">
 
     <select id="duplicateBook" resultType="int">
         SELECT COUNT(buy_id)
@@ -67,6 +67,28 @@
 
     <delete id="deleteBuyImages">
         DELETE FROM BUY_IMAGE WHERE buy_id=#{buy_id}
+    </delete>
+
+    <!-- 완료된 거래를 모두 삭제 -->
+    <delete id="deleteFinishedDealOfBuy">
+        DELETE FROM BUY WHERE buy_id IN
+        <foreach collection="matchings" item="matching" open="(" separator="," close=")">
+            #{matching.buy_id, jdbcType=INTEGER}
+        </foreach>
+    </delete>
+
+    <delete id="deleteFinishedDealOfBuyAreas">
+        DELETE FROM BUY_AREA WHERE buy_id IN
+        <foreach collection="matchings" item="matching" open="(" separator="," close=")">
+            #{matching.buy_id, jdbcType=INTEGER}
+        </foreach>
+    </delete>
+
+    <delete id="deleteFinishedDealOfBuyImages">
+        DELETE FROM BUY_IMAGE WHERE buy_id IN
+        <foreach collection="matchings" item="matching" open="(" separator="," close=")">
+            #{matching.buy_id, jdbcType=INTEGER}
+        </foreach>
     </delete>
 
 </mapper>

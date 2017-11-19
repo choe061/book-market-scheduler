@@ -13,19 +13,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Matching {
 
-    private int id;
+    private int matching_id;
     private int sale_id;
     private int buy_id;
 
-    private int sale_uid;
-    private int buy_uid;
 
-
-    public Matching(int sale_id, int buy_id, int sale_uid, int buy_uid) {
+    public Matching(int sale_id, int buy_id) {
         this.sale_id = sale_id;
         this.buy_id = buy_id;
-        this.sale_uid = sale_uid;
-        this.buy_uid = buy_uid;
     }
 
 }

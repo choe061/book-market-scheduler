@@ -1,10 +1,9 @@
 package com.bk.bm.service;
 
-import com.bk.bm.domain.FcmObject;
-import com.bk.bm.domain.Matching;
-import com.bk.bm.domain.Message;
-import com.bk.bm.domain.User;
-import com.bk.bm.persistence.MatchingTaskMapper;
+import com.bk.bm.domain.*;
+import com.bk.bm.repository.BuyMapper;
+import com.bk.bm.repository.MatchingTaskMapper;
+import com.bk.bm.repository.SaleMapper;
 import com.bk.bm.util.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +30,10 @@ public class MatchingTaskService {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private final MatchingTaskMapper matchingTaskMapper;
+    @Autowired
+    private BuyMapper buyMapper;
+    @Autowired
+    private SaleMapper saleMapper;
 
     @Autowired
     public MatchingTaskService(MatchingTaskMapper matchingTaskMapper) {
@@ -40,6 +43,10 @@ public class MatchingTaskService {
     @Scheduled(cron = "0 0/30 9-23 * * *")
     public void matchBookScheduler() {
         logger.debug("Scheduler start...");
+        ArrayList<Matching> matchings = matchingTaskMapper.getFinishedDealOfMatching();
+        backupFinishedDeal(matchings);
+        deleteFinishedDeal(matchings);
+
         ArrayList<Matching> newMatchingBooks = matchingTaskMapper.getNewMatchingBooks();
 
         if (!newMatchingBooks.isEmpty()) {
@@ -47,17 +54,36 @@ public class MatchingTaskService {
 
             ArrayList<Integer> uids = new ArrayList<>();
             for (Matching matching : newMatchingBooks) {
-                if (uids.contains(matching.getSale_uid())) {
-                    uids.add(matching.getSale_uid());
+                if (uids.contains(matching.getSale_id())) {
+                    uids.add(matching.getSale_id());
                 }
-                if (uids.contains(matching.getBuy_uid())) {
-                    uids.add(matching.getBuy_uid());
+                if (uids.contains(matching.getBuy_id())) {
+                    uids.add(matching.getBuy_id());
                 }
             }
             ArrayList<User> users = matchingTaskMapper.getFcmTokenOfUsers(uids);
             sendFcmNewMatching(users);
         }
         logger.debug("Scheduler end...");
+    }
+
+    private void backupFinishedDeal(ArrayList<Matching> matchings) {
+        ArrayList<History> histories = saleMapper.getFinishedDealOfSale(matchings);
+        ArrayList<SaleImage> saleImages = saleMapper.getFinishedDealOfSaleImages(matchings);
+        matchingTaskMapper.backupMatchingHistory(histories);
+        matchingTaskMapper.backupMatchingHistoryImage(saleImages);
+    }
+
+    private void deleteFinishedDeal(ArrayList<Matching> matchings) {
+        matchingTaskMapper.deleteMatching(matchings);
+
+        buyMapper.deleteFinishedDealOfBuy(matchings);
+        buyMapper.deleteFinishedDealOfBuyAreas(matchings);
+        buyMapper.deleteFinishedDealOfBuyImages(matchings);
+
+        saleMapper.deleteFinishedDealOfSale(matchings);
+        saleMapper.deleteFinishedDealOfSaleAreas(matchings);
+        saleMapper.deleteFinishedDealOfSaleImages(matchings);
     }
 
     private void sendFcmNewMatching(ArrayList<User> users) {

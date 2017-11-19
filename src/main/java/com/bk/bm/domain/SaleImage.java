@@ -15,4 +15,9 @@ public class SaleImage {
     private int sale_image_id;
     private String image_url;
     private int sale_id;
+
+    public SaleImage(String image_url, int sale_id) {
+        this.image_url = image_url;
+        this.sale_id = sale_id;
+    }
 }
