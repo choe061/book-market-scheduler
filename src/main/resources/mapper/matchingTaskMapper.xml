@@ -10,10 +10,11 @@
     </select>
 
     <insert id="backupMatchingHistory">
-        INSERT INTO HISTORY (seller_uid, buyer_uid, isbn10, isbn13, title, price, comment, matched_at)
+        INSERT INTO HISTORY (sale_id, seller_uid, buyer_uid, isbn10, isbn13, title, price, comment, matched_at)
         VALUES
         <foreach collection="histories" item="history" separator=",">
-            (#{history.seller_uid, jdbcType=INTEGER}, #{history.buyer_uid, jdbcType=INTEGER},
+            (#{history.sale_id, jdbcType=INTEGER},
+            #{history.seller_uid, jdbcType=INTEGER}, #{history.buyer_uid, jdbcType=INTEGER},
             #{history.isbn10, jdbcType=VARCHAR}, #{history.isbn13, jdbcType=VARCHAR},
             #{history.title, jdbcType=VARCHAR}, #{history.price, jdbcType=INTEGER},
             #{history.comment, jdbcType=VARCHAR}, #{history.matched_at, jdbcType=DATETIME})

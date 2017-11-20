@@ -13,6 +13,6 @@ import lombok.NoArgsConstructor;
 public class FcmObject {
 
     private String to;
-    private Message message;
+    private Message data;
 
 }

@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
+
 /**
  * Created by choi on 2017. 9. 25. PM 6:29.
  */
@@ -16,6 +18,8 @@ public class Matching {
     private int matching_id;
     private int sale_id;
     private int buy_id;
+    private Date matched_at;
+    private boolean status;
 
 
     public Matching(int sale_id, int buy_id) {

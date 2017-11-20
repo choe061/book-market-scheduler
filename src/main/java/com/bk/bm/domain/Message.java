@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 public class Message {
 
     private String title;
-    private String content;
     private String message;
 
 }

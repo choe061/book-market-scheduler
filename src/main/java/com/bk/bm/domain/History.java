@@ -15,7 +15,7 @@ import java.sql.Date;
 public class History {
     private static final long serialVersionUID = 1L;
 
-    private int history_id;
+    private int sale_id;
     private int seller_uid;
     private int buyer_uid;
     private String isbn10;

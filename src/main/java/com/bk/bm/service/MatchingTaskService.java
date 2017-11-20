@@ -19,6 +19,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by choi on 2017. 9. 25. PM 4:10.
@@ -29,16 +31,12 @@ import java.util.HashMap;
 public class MatchingTaskService {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    private final MatchingTaskMapper matchingTaskMapper;
+    @Autowired
+    private MatchingTaskMapper matchingTaskMapper;
     @Autowired
     private BuyMapper buyMapper;
     @Autowired
     private SaleMapper saleMapper;
-
-    @Autowired
-    public MatchingTaskService(MatchingTaskMapper matchingTaskMapper) {
-        this.matchingTaskMapper = matchingTaskMapper;
-    }
 
     @Scheduled(cron = "0 0/30 9-23 * * *")
     public void matchBookScheduler() {
@@ -91,15 +89,24 @@ public class MatchingTaskService {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.add("Authorization", "key=" + Constants.FCM_KEY);
+        Message message = new Message("췕48 매칭 알림", "찾고있는 책이 들어왔습니다");
+
+        int threadPoolCount = Runtime.getRuntime().availableProcessors() * 2 + 1;
+        ExecutorService fcmSendService = Executors.newFixedThreadPool(threadPoolCount);
 
         int size = users.size();
         for (int i = 0; i < size; i++) {
-            Message message = new Message("췕48 매칭 알림", "찾고있는 책이 들어왔습니다", "");
-            FcmObject fcmObject = new FcmObject(users.get(i).getFcm_token(), message);
-
-            HttpEntity request = new HttpEntity(fcmObject, headers);
-            restTemplate.exchange(Constants.FCM_SEND_ENDPOINT, HttpMethod.POST, request, HashMap.class);
+            String token = users.get(i).getFcm_token();
+            fcmSendService.submit(new Runnable() {
+                @Override
+                public void run() {
+                    FcmObject fcmObject = new FcmObject(token, message);
+                    HttpEntity request = new HttpEntity(fcmObject, headers);
+                    restTemplate.exchange(Constants.FCM_SEND_ENDPOINT, HttpMethod.POST, request, HashMap.class);
+                }
+            });
         }
+        fcmSendService.shutdown();
     }
 
 }
