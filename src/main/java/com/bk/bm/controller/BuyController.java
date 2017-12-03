@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * Created by choi on 2017. 10. 2. PM 8:51.
  */
 @RestController
-@RequestMapping(value = "/buy", produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/buy", produces = "application/json;charset=UTF-8")
 public class BuyController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     
